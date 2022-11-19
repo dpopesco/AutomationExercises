@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import page.objects.ContactUsPage;
 import page.objects.LoginPage;
 import page.objects.RegisterPage;
 
@@ -38,13 +39,16 @@ public class Steps extends BaseClass {
             driver = new FirefoxDriver();
         }
     }
+
     @After
     public void close_browser() {
         driver.close();
+        driver.quit();
+        driver = null;
     }
 
-    @Given("User Launch browser")
-    public void user_launch_browser() {
+    @Given("User Launches browser")
+    public void user_launches_browser() {
         lp = new LoginPage(driver);
     }
 
@@ -75,7 +79,6 @@ public class Steps extends BaseClass {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-qa='login-email']")));
     }
-
 
 
     //register feature
@@ -117,6 +120,45 @@ public class Steps extends BaseClass {
     public void user_can_view_confirmation_message(String message) {
         Assert.assertTrue(driver.findElement(By.xpath("//h2[@data-qa='account-created']/b")).getText()
                 .contains(message));
+    }
+
+    //contact us feature
+    @When("clicks on Contact us link")
+    public void clicks_on_contact_us_link() {
+        cp = new ContactUsPage(driver);
+        cp.clickContactUs();
+    }
+
+    @Then("Title should be {string}")
+    public void title_should_be(String message) {
+        /*wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("")));*/
+        Assert.assertTrue((driver.getPageSource().contains(message)));
+    }
+
+    @When("User enters contacting details")
+    public void user_enters_contacting_details() {
+        cp.setName();
+        cp.setEmail();
+        cp.setMessage();
+    }
+
+    @When("clicks on Submit button")
+    public void clicks_on_submit_button() {
+        cp.clickSubmitButton();
+    }
+
+    @When("clicks on OK to proceed")
+    public void clicks_on_ok_to_proceed() {
+        cp.acceptAlertBox();
+    }
+
+    @Then("Message should be {string}")
+    public void message_should_be(String msg) {
+        String xpath = "//div[@class='contact-form']/div[2]";
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+        Assert.assertTrue(driver.findElement(By.xpath(xpath)).getText().contains(msg));
     }
 
 }

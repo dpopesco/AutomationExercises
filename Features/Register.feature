@@ -1,7 +1,7 @@
 Feature: Register
 
   Scenario: Successful Register with Valid Data
-    Given User Launch browser
+    Given User Launches browser
     When User opens URL "https://automationexercise.com/login"
     And User enters generated Name and generated Email
     And Click on Signup
@@ -11,7 +11,7 @@ Feature: Register
     Then User can view confirmation message "ACCOUNT CREATED!"
 
   Scenario Outline: Register Invalid Data
-    Given User Launch browser
+    Given User Launches browser
     When User opens URL "https://automationexercise.com/login"
     And User enters Name as "<name>" and Email as "<email>"
     And Click on Signup

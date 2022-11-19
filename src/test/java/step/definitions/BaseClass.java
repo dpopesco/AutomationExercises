@@ -2,6 +2,7 @@ package step.definitions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import page.objects.ContactUsPage;
 import page.objects.LoginPage;
 import page.objects.RegisterPage;
 
@@ -13,5 +14,6 @@ public class BaseClass {
     public WebDriverWait wait;
     public LoginPage lp;
     public RegisterPage rp;
+    public ContactUsPage cp;
     public Properties configProperties;
 }
