@@ -14,11 +14,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page.objects.ContactUsPage;
 import page.objects.LoginPage;
+import page.objects.ProductsPage;
 import page.objects.RegisterPage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 public class Steps extends BaseClass {
@@ -159,6 +161,29 @@ public class Steps extends BaseClass {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
         Assert.assertTrue(driver.findElement(By.xpath(xpath)).getText().contains(msg));
+    }
+
+    //products feature
+    @When("clicks on Products link")
+    public void clicks_on_products_link() {
+        pp = new ProductsPage(driver);
+        pp.clickProducts();
+    }
+
+    @Then("Products list is visible")
+    public void products_list_is_visible() {
+        pp.checkProductsPresence();
+    }
+
+    @When("User clicks View Product having Product as {string}")
+    public void user_clicks_view_product_having_product_as(String product) {
+        pp.clickViewProduct(product);
+    }
+
+    @Then("all components from Detail page for Product as {string} are visible")
+    public void all_components_from_detail_page_for_product_as_are_visible(String product) {
+        pp.checkProductName(product);
+        pp.productComponentsArePresent();
     }
 
 }

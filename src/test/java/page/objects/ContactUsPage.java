@@ -15,7 +15,7 @@ public class ContactUsPage {
         PageFactory.initElements(ldriver, this);
     }
 
-    @FindBy(css = "a[href='/contact_us'")
+    @FindBy(css = "a[href='/contact_us']")
     @CacheLookup
     WebElement contactUsLink;
 
