@@ -12,15 +12,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import page.objects.ContactUsPage;
-import page.objects.LoginPage;
-import page.objects.ProductsPage;
-import page.objects.RegisterPage;
+import page.objects.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
 import java.util.Properties;
 
 public class Steps extends BaseClass {
@@ -132,9 +128,8 @@ public class Steps extends BaseClass {
     }
 
     @Then("Title should be {string}")
-    public void title_should_be(String message) {
-        /*wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("")));*/
+    public void title_should_be(String message) throws InterruptedException {
+        Thread.sleep(3000);
         Assert.assertTrue((driver.getPageSource().contains(message)));
     }
 
@@ -186,4 +181,57 @@ public class Steps extends BaseClass {
         pp.productComponentsArePresent();
     }
 
+    //product feature - search functionality
+
+    @When("User enters keyword as {string} in Search field")
+    public void user_enters_keyword_as_in_search_field(String product) {
+        pp.searchProductName(product);
+    }
+
+    @When("clicks on Search button")
+    public void clicks_on_search_button() {
+        pp.clickOnSearch();
+    }
+
+    @Then("all products having searched keyword as {string} are visible")
+    public void all_products_having_searched_keyword_as_are_visible(String product) {
+        pp.searchedProductsAreVisible(product);
+    }
+
+    //cart feature
+    @When("User hovers over Product having the name {string}")
+    public void user_hovers_over_product_having_the_name(String product) {
+        ctp = new CartPage(driver);
+        ctp.hoverOverProduct(product);
+    }
+
+    @When("clicks on Add to cart button having Product as {string}")
+    public void clicks_on_add_to_cart_button_having_product_as(String product) {
+        ctp.clickOnAddToCartButton(product);
+    }
+
+    @When("clicks on Continue Shopping")
+    public void clicks_on_continue_shopping() {
+        ctp.clickOnContinue();
+    }
+
+    @Then("modal window should disappear")
+    public void modal_window_should_disappear() throws InterruptedException {
+        ctp.checkModalWindowDisappeared();
+    }
+
+    @When("User hovers over to the next Product having the name {string}")
+    public void user_hovers_over_to_the_next_product_having_the_name(String product) {
+        ctp.hoverOverProduct(product);
+    }
+
+    @When("clicks on View Cart link")
+    public void clicks_on_view_cart_link() {
+        ctp.clicksOnViewCart();
+    }
+
+    @Then("product {string} with Price {int} , Quantity {int} and Total price {int} is added to the Cart")
+    public void product_with_price_quantity_and_total_price_is_added_to_the_cart(String productName, Integer price, Integer quantity, Integer totalPrice) {
+        ctp.checkProductAddedInCart(productName, price, quantity, totalPrice);
+    }
 }

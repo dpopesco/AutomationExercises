@@ -48,6 +48,18 @@ public class ProductsPage {
     @CacheLookup
     WebElement brand;
 
+    @FindBy(id = "search_product")
+    @CacheLookup
+    WebElement txtSearch;
+
+    @FindBy(id = "submit_search")
+    @CacheLookup
+    WebElement btnSearch;
+
+    @FindAll(@FindBy(xpath = "//div[@class='single-products']/div/p"))
+    @CacheLookup
+    List<WebElement> searchResults;
+
 
     public void clickProducts() {
         productsLink.click();
@@ -72,5 +84,21 @@ public class ProductsPage {
         Assert.assertTrue(availability.isDisplayed());
         Assert.assertTrue(condition.isDisplayed());
         Assert.assertTrue(brand.isDisplayed());
+    }
+
+    public void searchProductName(String product) {
+        txtSearch.clear();
+        txtSearch.sendKeys(product);
+    }
+
+    public void clickOnSearch() {
+        btnSearch.click();
+    }
+
+    public void searchedProductsAreVisible(String product) {
+
+        for (WebElement result : searchResults) {
+            Assert.assertTrue(result.getText().toLowerCase().contains(product.toLowerCase()));
+        }
     }
 }
