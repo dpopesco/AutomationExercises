@@ -3,20 +3,16 @@ package step.definitions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class BaseClass {
-
+public class TestContext {
     public WebDriver driver;
-    public WebDriverWait wait;
     public Properties configProperties;
 
-    protected void setup() throws IOException {
+    public TestContext() throws IOException {
         //reading properties
         configProperties = new Properties();
         FileInputStream configPropFile = new FileInputStream("config.properties");
@@ -30,11 +26,5 @@ public class BaseClass {
             System.setProperty("webdriver.gecko.driver", configProperties.getProperty("firefoxpath"));
             driver = new FirefoxDriver();
         }
-    }
-
-    protected void close_browser() {
-        driver.close();
-        driver.quit();
-        driver = null;
     }
 }

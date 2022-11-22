@@ -1,9 +1,8 @@
 Feature: Contact us
 
   Scenario: Successful submission of Contact us form
-    Given User Launches browser
-    When User opens URL "https://automationexercise.com/"
-    And clicks on Contact us link
+    Given User opens URL "https://automationexercise.com/"
+    When clicks on Contact us link
     Then Title should be "Get In Touch"
     When User enters contacting details
     And clicks on Submit button
