@@ -1,5 +1,6 @@
 package page.objects;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -30,6 +31,10 @@ public class LoginPage {
     @CacheLookup
     WebElement btnLogout;
 
+    @FindBy(xpath = "//a[contains(text(),'Logged in as')]")
+    @CacheLookup
+    WebElement accountName;
+
     public void setEmail(String email) {
         txtEmail.clear();
         txtEmail.sendKeys(email);
@@ -47,4 +52,9 @@ public class LoginPage {
     public void clickLogout() {
         btnLogout.click();
     }
+
+    public void checkAccountName(){
+        Assert.assertTrue(accountName.getText().contains("Logged in as"));
+    }
+
 }

@@ -20,11 +20,6 @@ public class RegisterSteps extends BaseClass {
         rp = new RegisterPage(driver);
     }
 
-    /*@After
-    public void close_browser() {
-        super.close_browser();
-    }*/
-
     @When("User enters generated Name and generated Email")
     public void user_enters_generated_name_and_generated_email() {
 

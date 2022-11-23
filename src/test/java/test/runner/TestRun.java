@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = ".//Features/Cart.feature",
+        features = ".//Features/TestCases.feature",
         glue = "step.definitions",
         dryRun = false,
         plugin = {"pretty", "html:test-output"}

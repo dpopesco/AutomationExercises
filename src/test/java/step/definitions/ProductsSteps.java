@@ -13,11 +13,6 @@ public class ProductsSteps extends BaseClass {
         pp = new ProductsPage(driver);
     }
 
-    /*@After
-    public void close_browser() {
-        super.close_browser();
-    }*/
-
     @When("clicks on Products link")
     public void clicks_on_products_link() {
         pp.clickProducts();

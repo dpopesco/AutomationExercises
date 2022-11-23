@@ -1,6 +1,6 @@
 package step.definitions;
 
-import io.cucumber.java.After;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,11 +16,6 @@ public class LoginSteps extends BaseClass {
         this.driver = context.driver;
         lp = new LoginPage(driver);
     }
-
-    /*@After
-    public void close_browser() {
-        super.close_browser();
-    }*/
 
     @When("User enters Email as {string} and Password as {string}")
     public void user_enters_email_as_and_password_as(String email, String password) {
@@ -38,5 +33,10 @@ public class LoginSteps extends BaseClass {
         lp.clickLogout();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-qa='login-email']")));
+    }
+
+    @Then("User is Logged in as specified name")
+    public void user_is_logged_in_as_specified_name() {
+        lp.checkAccountName();
     }
 }

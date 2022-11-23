@@ -2,6 +2,7 @@ package step.definitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import page.objects.CartPage;
 
 public class CartSteps extends BaseClass {
@@ -21,5 +22,10 @@ public class CartSteps extends BaseClass {
     @Then("product {string} with Quantity {int} is added to the Cart")
     public void product_with_quantity_is_added_to_the_cart(String productName, Integer quantity) {
         ctp.checkProductQuantityInCart(productName, quantity);
+    }
+
+    @When("User clicks on Cart button")
+    public void user_clicks_on_cart_button() {
+        ctp.clickCart();
     }
 }

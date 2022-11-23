@@ -25,6 +25,10 @@ public class CartPage {
     @CacheLookup
     List<WebElement> cartProductList;
 
+    @FindBy(css="a[href='/view_cart']")
+    @CacheLookup
+    WebElement btnCart;
+
 
     public void checkProductAddedInCart(String productName, Integer price, Integer quantity, Integer totalPrice) {
 
@@ -42,6 +46,10 @@ public class CartPage {
         Assert.assertTrue(row.findElement(By.xpath("//td[@class='cart_quantity']/button")).getText().equals(quantity.toString()));
     }
 
+    public void clickCart(){
+        btnCart.click();
+    }
+
     private WebElement getProductRowByName(String productName) {
         WebElement row = null;
         for (WebElement product : cartProductList) {
@@ -53,4 +61,5 @@ public class CartPage {
         }
         return row;
     }
+
 }
